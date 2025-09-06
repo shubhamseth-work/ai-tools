@@ -19,7 +19,7 @@ const json = {
   "token_uri": process.env.token_uri,
   "auth_provider_x509_cert_url": process,
   "client_x509_cert_url": process.env.client_x509_cert_url,
-  "universe_domain": ""
+  "universe_domain": process.env.universe_domain
 }
 const keyPath = path.join(__dirname, '..', '..', 'sa', 'sa-keys.json');
 import {
