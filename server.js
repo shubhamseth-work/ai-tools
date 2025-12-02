@@ -4,6 +4,7 @@ dotenv.config();
 import express from 'express';
 import axios from 'axios';
 import cors from 'cors';
+
  // Ensure you have newrelic installed and configured
 const app = express();
 import { getWeatherByCity } from './functions/src/weather/weatherService.js';
@@ -13,6 +14,9 @@ import { sendOpenAiPrompt } from './functions/src/langchain/openAiApi.js';
 import { queryApi } from './functions/src/mcp/firestoreQueryApi.js';
 import { slotGame } from './functions/src/games/slotMachine.js';
 import {reviewCode} from './functions/src/openai/review.js';
+import { sendMsgAlerts } from './functions/src/gcp/pubsub/sendMsgAlerts.js';
+import { downloadPdfFromUrl } from './functions/src/scripts/downloadPdfByUrl.js';
+import { extractRecrodFromDocument } from './functions/src/scripts/extractDataFromPdf.js';
 const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
@@ -42,7 +46,7 @@ app.get('/images-scan',async (req,res)=>{
 }) 
 
 app.get('/weather', async (req, res) => {
-  console.log(req.query, req.params, req.body)
+  console.log(req.query, req. rams, req.body)
     const { city } = req.query;
 
     try {
@@ -111,6 +115,55 @@ app.get('/api/review-code', async (req, res) => {
     console.log('Review code:', result);
     res.json({ result });
 }); 
+
+app.get('/send-message-alerts',async (req,res)=>{
+  console.log('Sending Alerts message...');
+  try {
+    const messageId = await sendMsgAlerts(req, res);
+    console.log('Published MessageId', messageId);
+    return res.status(200).json({ messageId: messageId });
+  } catch (error) {
+    console.error('Error in sendMsgAlerts call:', error);
+    return res.status(400).json({ error: error.message || 'Error sending message alert' });
+  }
+})
+
+
+app.get('/download-pdf',async (req,res)=>{
+  console.log('Downloading pdf from url dynamic...');
+  try {
+    const downloadFolder = await downloadPdfFromUrl(req, res);
+    console.log('Downloaded pdfs', downloadFolder);
+    return res.status(200).json({ downloadFolder: downloadFolder });
+  } catch (error) {
+    console.error('Error in downloading pdf:', error);
+    return res.status(400).json({ error: error.message || 'Error in downloading pdf'});
+  }
+})
+
+app.get('/extract-pdf',async (req,res)=>{
+  console.log('Extracting from pdf...');
+  try {
+    const result = await extractRecrodFromDocument(req, res);
+    console.log('Extracting pdfs', result);
+    return res.status(200).json({ result: result });
+  } catch (error) {
+    console.error('Error in Error in extracting pdf:', error);
+    return res.status(400).json({ error: error.message || 'Error in extracting pdf'});
+  }
+})
+
+function listRoutes(app) {
+    console.log("📌 Registered Routes:");
+    app._router.stack
+        .filter(r => r.route)
+        .forEach(r => {
+            const route = r.route;
+            const method = Object.keys(route.methods)[0].toUpperCase();
+            console.log(`${method}  http://localhost:${PORT}${route.path}`);
+        });
+}
+listRoutes(app);
 
 app.listen(PORT,()=>{
     console.log(`Server is running on http://localhost:${PORT}`);

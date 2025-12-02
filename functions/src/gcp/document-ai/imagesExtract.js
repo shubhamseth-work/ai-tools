@@ -28,7 +28,6 @@ import {
     PROJECT_ID,
     LOCATION,
     PROCESSOR_ID,
-    MIME_TYPE_JPEG,
 } from '../../util/constant.js';
 import { v4 as uuidv4 } from 'uuid';
 
