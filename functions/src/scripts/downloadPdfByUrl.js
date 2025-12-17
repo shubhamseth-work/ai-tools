@@ -13,15 +13,14 @@ const downloadFolder = path.join(__dirname, "pdfs");
 const folderName= "A52_Vaisahali_PDFs";
 const finalFolderPath = path.join(downloadFolder, folderName);
 console.log('Download folder path:', finalFolderPath);
-if (!fs.existsSync(finalFolderPath)) {
-    fs.mkdirSync(finalFolderPath);
-}
 
 // Sleep function (5 seconds)
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const downloadPdfFromUrl = async (req, res) => {
-    
+    if (!fs.existsSync(finalFolderPath)) {
+        fs.mkdirSync(finalFolderPath);
+    }
     try {
         for (let i = 1; i <= 230; i++) {
             const num = i.toString().padStart(3, "0"); // 001, 002, ..., 230

@@ -17,6 +17,7 @@ import {reviewCode} from './functions/src/openai/review.js';
 import { sendMsgAlerts } from './functions/src/gcp/pubsub/sendMsgAlerts.js';
 import { downloadPdfFromUrl } from './functions/src/scripts/downloadPdfByUrl.js';
 import { extractRecrodFromDocument } from './functions/src/scripts/extractDataFromPdf.js';
+import { unlockPdfDocument } from './functions/src/scripts/unlockPdfPassword.js';
 const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
@@ -153,6 +154,16 @@ app.get('/extract-pdf',async (req,res)=>{
   }
 })
 
+app.get('/unlock-pdf',async (req,res)=>{
+  try {
+    const result = await unlockPdfDocument(req, res);
+    console.log('Unlocking pdfs', result);
+    return res.status(200).json({ result: result });
+  } catch (error) {
+    console.error('Error in unlocking pdf:', error);
+    return res.status(400).json({ error: error.message || 'Error in unlocking pdf'});
+  }
+})
 function listRoutes(app) {
     console.log("📌 Registered Routes:");
     app._router.stack
