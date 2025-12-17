@@ -7,9 +7,7 @@ const __dirname = path.dirname(__filename);
 import { PDFParse } from 'pdf-parse';
 const dirPath = path.join(__dirname, "excels");
 // Ensure folder exists
-if (!fs.existsSync(dirPath)) {
-    fs.mkdirSync(dirPath, { recursive: true });
-}
+
 const uniqueTimestamp = Date.now();
 const fileName = `filtered_records_${uniqueTimestamp}.csv`;
 const csvFilePath = path.join(dirPath, fileName);
@@ -57,7 +55,6 @@ function parseRow(line) {
 
 async function processPDF(filePath, pdfName) {
     // const dataBuffer = fs.readFileSync(filePath);
-
     const parser = new PDFParse({ url: filePath });
     const pdfData = await parser.getText();
     await parser.destroy();
