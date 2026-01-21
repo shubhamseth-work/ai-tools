@@ -13,7 +13,6 @@ const fileName = `filtered_records_${uniqueTimestamp}.csv`;
 const csvFilePath = path.join(dirPath, fileName);
 // Folder containing PDFs
 const pdfFolder = path.join(__dirname, "pdfs");
-console.log('PDF folder path:', pdfFolder);
 
 const csvWriter = createCsvWriter({
     path: csvFilePath,
@@ -64,10 +63,10 @@ async function processPDF(filePath, pdfName) {
     const results = [];
     // const FIRST = "कमल";
     // const LAST = "साह";
-    const FIRST = "गीता";
-    const LAST = "देवी";
+    const FIRST = "शिप्रा";
+    const LAST = "";
     for (let line of lines) {
-        if (line.includes("गीता") || line.includes("देवी")) {
+        if (line.includes("शिप्रा") || line.includes("शीप्रा")) {
         // if (line.includes("कमल") || line.includes("साह") || line.includes("गीता") || line.includes("देवी")) {
             const row = parseRow(line);
 

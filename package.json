@@ -35,6 +35,8 @@
     "langchain": "^0.3.30",
     "marked": "^16.1.2",
     "newrelic": "^13.0.0",
+    "newsapi": "^2.4.1",
+    "node-gtts": "^2.0.2",
     "nodemon": "^3.1.10",
     "openai": "^5.16.0",
     "pdf-lib": "^1.17.1",

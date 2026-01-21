@@ -12,7 +12,6 @@ const baseUrl = `https://www.eci.gov.in/eci-backend/public/ER/s04/06%20Vaishali/
 const downloadFolder = path.join(__dirname, "pdfs");
 const folderName= "A52_Vaisahali_PDFs";
 const finalFolderPath = path.join(downloadFolder, folderName);
-console.log('Download folder path:', finalFolderPath);
 
 // Sleep function (5 seconds)
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
