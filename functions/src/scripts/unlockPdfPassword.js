@@ -10,7 +10,6 @@ const outputFolder = path.join(__dirname, "unlocked_pdfs");
 const outfileName = "output_unlocked.pdf";
 const passwordListPath = path.join(__dirname, "passwords.txt");
 const outputPath = path.join(outputFolder, outfileName);
-console.log('PDF folder path:', pdfFolder);
 import { execFile } from "child_process";
 
 function unlockPdf(filePath, outputPath, passwordListPath) {
