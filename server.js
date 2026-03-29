@@ -224,7 +224,7 @@ app.post('/ollama-chat',async (req,res)=>{
     }
     activeRequests++;
 
-    const input = req.body?.prompt || "What is the capital of France?";
+    const input = req.body?.message || "What is the capital of India?";
     console.log('Received Ollama prompt:',  input);
 
     const output = await sendOllamaPrompt(input, req.body);
