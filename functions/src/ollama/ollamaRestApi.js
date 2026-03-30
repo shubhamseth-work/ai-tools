@@ -33,6 +33,8 @@ function cleanLLMResponse(input, options = {}) {
     .split("\n")
     .map(line => line.trim())
     .join("\n");
+  // 7. Fix numbered lists (ensure spacing)
+  text = text.replace(/(\d+\.)(\S)/g, "$1 $2");
 
   // 7. Fix bullet points (ensure spacing)
   text = text.replace(/(\d+\.)(\S)/g, "$1 $2"); // 1.Test → 1. Test
@@ -48,7 +50,7 @@ function cleanLLMResponse(input, options = {}) {
       .replace(/`([^`]*)`/g, "$1")     // inline code
       .replace(/[*_~]/g, "");          // bold/italic
   }
-
+  
   // 10. Optional: Convert to HTML-safe
   if (options.escapeHTML) {
     text = text
@@ -58,9 +60,59 @@ function cleanLLMResponse(input, options = {}) {
   }
 
   // 11. Final trim
-  return text.trim();
+  text = formatLLMResponse(text.trim());
+  return cleanText;
 }
 
+function formatLLMResponse(rawText) {
+  if (!rawText) return [];
+
+  let text = String(rawText);
+
+  // Normalize
+  text = text
+    .replace(/\\n/g, "\n")
+    .replace(/\\r/g, "\r")
+    .replace(/\r\n/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+
+  // Split into blocks (code vs text)
+  const blocks = [];
+  const regex = /```(\w+)?\n([\s\S]*?)```/g;
+
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    // Push text before code
+    if (match.index > lastIndex) {
+      blocks.push({
+        type: "text",
+        content: text.slice(lastIndex, match.index).trim()
+      });
+    }
+
+    // Push code block
+    blocks.push({
+      type: "code",
+      language: match[1] || "plaintext",
+      content: match[2].trim()
+    });
+
+    lastIndex = regex.lastIndex;
+  }
+
+  // Remaining text
+  if (lastIndex < text.length) {
+    blocks.push({
+      type: "text",
+      content: text.slice(lastIndex).trim()
+    });
+  }
+
+  return blocks;
+}
 // Secure Chat API
 const sendOllamaPrompt = async (message, options) => {
   try {
