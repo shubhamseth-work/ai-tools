@@ -1,0 +1,9 @@
+export const NEW_RELIC_API_KEY= process.env.NEW_RELIC_API_KEY;
+export const AWS_API_KEY = process.env.AWS_API_KEY;
+export const API_KEY= process.env.API_KEY;
+export const BUCKET_NAME= process.env.BUCKET_NAME;
+export const PROJECT_ID= process.env.GCP_PROJECT_ID;
+export const LOCATION= process.env.LOCATION;
+export const PROCESSOR_ID= process.env.PROCESSOR_ID;
+export const FILENAME= process.env.FILENAME;
+export const json= process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON;
