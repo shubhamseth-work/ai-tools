@@ -16,7 +16,7 @@ function cleanLLMResponse(input, options = {}) {
     .replace(/\\r/g, "\r")
     .replace(/\\t/g, "\t");
 
-  // 2. Remove unwanted quotes wrapping entire string
+  // 2. Remove unwanted quotes wrapping entire string.
   text = text.replace(/^["']|["']$/g, "");
 
   // 3. Fix multiple concatenation artifacts (rare cases)
