@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "firestore-mcp": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@devlimelabs/firestore-mcp",
+        "--key",
+        "e38f48e1-646a-4b14-8299-55ac394f0b9e",
+        "--credentials",
+        "C:/projects/backend/functions/src/sa/sa-keys.json"
+      ]
+    }
+  }
+}

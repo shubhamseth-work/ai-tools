@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "cloudfunctioncrud"
+    "default": "api-surface-development",
+    "development": "api-surface-development",
+    "release": "api-surface-release",
+    "prod": "api-surface-prod"
   }
 }
