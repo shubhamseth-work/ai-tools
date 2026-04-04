@@ -104,8 +104,8 @@ deploy:development:
     - firebase deploy --only firestore:rules --project ${FIREBASE_PROJECT_ID} --token ${FIREBASE_TOKEN}
   only:
     - develop
-  rules:
-    - if: '$CI_COMMIT_BRANCH =~ /^(dev|development|sandbox)$/ && $CI_PIPELINE_SOURCE == "merge_request_event"'
+  # rules:
+  #   - if: '$CI_COMMIT_BRANCH =~ /^(dev|development|sandbox)$/ && $CI_PIPELINE_SOURCE == "merge_request_event"'
  
 # ─── STAGE 6: DEPLOY — RELEASE (auto) ───
 deploy:release:
