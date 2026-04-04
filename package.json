@@ -1,62 +1,56 @@
 {
-  "name": "google_cloud_api",
+  "name": "google-cloud-api",
   "version": "1.0.0",
   "description": "Cloud Run and Google APIs",
   "main": "server.js",
   "type": "module",
+
+  "engines": {
+    "node": ">=22"
+  },
+
   "scripts": {
     "start": "node server.js",
-    "serve": "nodemon server.js",
-    "start:mcp": "smithery run firestore-mcp",
-    "mcp": "npx @smithery/cli run firestore-mcp",
-    "test": "mocha \"**/*.test.js\""
+    "dev": "nodemon server.js",
+    "test": "mocha \"**/*.test.js\"",
+    "test:watch": "mocha --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "mcp": "npx @smithery/cli run firestore-mcp"
   },
+
   "dependencies": {
     "@google-cloud/documentai": "^9.3.0",
     "@google-cloud/pubsub": "^5.2.0",
     "@google-cloud/storage": "^7.16.0",
     "@google/genai": "^1.11.0",
     "@google/generative-ai": "^0.24.1",
-    "@modelcontextprotocol/sdk": "^1.17.2",
-    "@sinonjs/referee-sinon": "^12.0.0",
-    "@smithery/cli": "^1.2.17",
-    "@smithery/sdk": "^1.5.5",
-    "@smithy/core": "^3.8.0",
-    "axios": "^1.10.0",
-    "body-parser": "^2.2.0",
-    "cors": "^2.8.5",
-    "csv-writer": "^1.6.0",
-    "dotenv": "^17.2.1",
-    "express": "^4.21.2",
-    "fast-csv": "^5.0.5",
-    "highlight.js": "^11.11.1",
-    "jsverify": "^0.8.4",
-    "knuth-shuffle": "^1.0.8",
     "langchain": "^0.3.30",
-    "marked": "^16.1.2",
-    "newrelic": "^13.0.0",
-    "newsapi": "^2.4.1",
-    "node-gtts": "^2.0.2",
-    "nodemon": "^3.1.10",
     "openai": "^5.16.0",
+    "express": "^4.21.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "axios": "^1.10.0",
+    "csv-writer": "^1.6.0",
+    "fast-csv": "^5.0.5",
     "pdf-lib": "^1.17.1",
     "pdf-parse": "^2.4.5",
-    "react-router-dom": "^7.7.1",
     "sanitize-html": "^2.17.0",
-    "sinon": "^21.0.0",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "newrelic": "^13.0.0"
   },
-  "engines": {
-    "node": "20"
-  },
-  "keywords": [
-    "GCP"
-  ],
-  "author": "shubham_seth",
-  "license": "ISC",
+
   "devDependencies": {
-    "chai": "^5.2.1",
+    "nodemon": "^3.1.10",
     "mocha": "^11.7.1",
-    "supertest": "^7.1.3"
-  }
+    "chai": "^5.2.1",
+    "supertest": "^7.1.3",
+    "sinon": "^21.0.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.0.0"
+  },
+  "keywords": ["GCP", "Cloud Run", "Node.js"],
+  "author": "shubham_seth",
+  "license": "ISC"
 }
