@@ -51,6 +51,7 @@ lint:eslint:
 test:unit:
   stage: test
   script:
+   - echo 'Running lint...'
     - npm run test:unit
   coverage: '/Lines\s*:\s*(\d+\.?\d*)%/'
   artifacts:
