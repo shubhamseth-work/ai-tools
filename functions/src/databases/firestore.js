@@ -3,6 +3,7 @@ const admin = require('firebase-admin');
 let db;
  
 function initFirestore() {
+  console.log('Initializing Firestore...');
   if (!admin.apps.length) {
     // In CI/CD: service account JSON is injected as env variable
     // Locally: reads from JSON file
